@@ -1,0 +1,49 @@
+
+<div style="margin-top: 10%;" class="row">
+    <form class="col s12" #login ="ngForm" (ngSubmit)= "gototodos()">
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="first_name">User Name</label>
+          <input 
+          name="username" 
+          type="text" 
+          [(ngModel)]="name"
+          required
+          pattern="[a-zA-Z ]+" 
+          minlength="1"
+          #input1 = "ngModel"
+          >
+          <div *ngIf=" input1.touched && input1.invalid">
+            <p style="color: red" *ngIf="input1?.errors?.['required']"> name required</p>    
+        </div>
+        </div>
+      </div>
+      <pre></pre>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="password">Password</label>
+          <input
+          name="password"
+          type="password" 
+          [(ngModel)]="password"
+          required 
+          minlength="8"
+          #input2 = "ngModel"
+          />
+          <div *ngIf="input2.touched && input2.invalid">
+            <p style="color: red" *ngIf="input2?.errors?.['required']"> password required</p>
+          </div>
+          <div *ngIf="input2.touched && input2.valid">
+            <p style="color: red;" *ngIf="!verificationuser(name,password)">The name or the password is wrong </p>
+          </div>
+        </div>
+      </div>
+      <pre></pre>      
+    <div>
+      <button style="margin-left: 45%; color: #137cb1; margin-bottom: 3%;" class="btn waves-effect waves-light" type="submit" [disabled]= " login.invalid || !verificationuser(name,password)"  name="action">Submit
+        <i class="material-icons right"></i>
+      </button>
+    </div>      
+    </form>
+  </div>
+        

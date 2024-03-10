@@ -1,0 +1,36 @@
+
+    <form style="text-align: center;" action="" #login ="ngForm" (ngSubmit)= "emitFormValue()" >
+        <label style="color: black;" for="nameTask">Task</label>
+        <input style="color: black" 
+            type="text"
+            name = "Task"
+            [(ngModel)] = "label"
+            required
+            pattern="[a-zA-Z é'èà^,;.!]+" 
+            minlength="1"
+            #input1 = "ngModel" />
+    
+        <div *ngIf="input1.touched && input1.invalid">
+            <p style="color: red" *ngIf="input1?.errors?.['required']"> Task required</p>
+            <p style="color: red" *ngIf="input1?.errors?.['pattern']">your task name can only be composed of  letter</p>
+    
+        </div>
+        <pre></pre>
+        <label style="color: black" for="date">Date</label>
+        <input style="color: black"  
+            type="date" 
+            name="Date"
+            [(ngModel)]= "date" 
+            required 
+            (emptied)="true"
+            #input2 = "ngModel"
+            class="datepicker"
+            />
+        <div *ngIf="input2.touched && input2.invalid">
+            <p  style="color: red" *ngIf="input2.invalid"> Date required</p>
+        </div>
+        <pre></pre>
+        <button style="color: #137cb1; margin-bottom: 3%;" class="btn waves-effect waves-light" type="submit" [disabled]="login.invalid " name="action">Submit
+            <i class="material-icons right"></i>
+        </button>
+    </form>
